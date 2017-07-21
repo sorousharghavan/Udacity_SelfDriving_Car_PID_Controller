@@ -15,7 +15,17 @@ To see a video of the vehicle driving a lap around the track autonomously visit 
 ### The effect of the P, I, D component of the PID algorithm in implementation. Is it what you expected?
 The P controller determines how agile the controller is to respond to deviation from the set point. The larger the P gain is, the larger the steer value will be. Ideally, a very large P gain is desired for this project. However, by increasing the P gain, the car will overshoot and begin to oscillate out of control. This is expected since the vehicle will begin to deviate further and further from the set point, increasing the steer value each time. This is where the D controller becomes handy.
 
+Kp = 0.2, Ki = 0, Kd = 0;
+![P Gain](./high_p.gif)
+
+Kp = 1, Ki = 0, Kd = 0;
+![High P Gain](./high_p_2.gif)
+
+
 The D controller will dampen the amplitude of the oscillatiosn and allow for larger P gains. Again, this is aligned with the expectations since large P gains will cause larger differentials in steer values.
+
+Kp = 0.2, Ki = 0, Kd = 2;
+![D Gain](./d_gaion.gif)
 
 The I controller ensures that the vehicles remains close to the center of the track as even the slightest deviations will build up to a large steer value. However, since the simulator does not have any "friction" or dissipation of energy, even a small value of I gain will result in a slight oscillation about the set point (center of the track). This is not surprising since the I controller is usually used to overcome physical imperfections such as friction or bias.
 
