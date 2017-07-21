@@ -25,7 +25,7 @@ Kp = 1, Ki = 0, Kd = 0;
 The D controller will dampen the amplitude of the oscillatiosn and allow for larger P gains. Again, this is aligned with the expectations since large P gains will cause larger differentials in steer values.
 
 Kp = 0.2, Ki = 0, Kd = 2;
-![D Gain](./d_gaion.gif)
+![D Gain](./d_gain.gif)
 
 The I controller ensures that the vehicles remains close to the center of the track as even the slightest deviations will build up to a large steer value. However, since the simulator does not have any "friction" or dissipation of energy, even a small value of I gain will result in a slight oscillation about the set point (center of the track). This is not surprising since the I controller is usually used to overcome physical imperfections such as friction or bias.
 
