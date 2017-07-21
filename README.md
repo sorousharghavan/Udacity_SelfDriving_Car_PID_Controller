@@ -29,6 +29,24 @@ Kp = 0.2, Ki = 0, Kd = 2;
 
 The I controller ensures that the vehicles remains close to the center of the track as even the slightest deviations will build up to a large steer value. However, since the simulator does not have any "friction" or dissipation of energy, even a small value of I gain will result in a slight oscillation about the set point (center of the track). This is not surprising since the I controller is usually used to overcome physical imperfections such as friction or bias.
 
+###  How I chose the final hyperparameters (P, I, D coefficients)
+The strategy I chose was to start with a proportional controller and find a sufficiently large P gain first. Then, to dampen the oscillations, I added a derivative controller and increase D gain from small values until the vehicle became stable. At the end, I added a small I gain in order to get the vehicle to stay closer to the center of the track. Below are the manual steps I took to tune the controller:
+
+  //pid.Init(0.2,0,0.01); //Too much oscillation.
+  //pid.Init(0.1,0,0.01); //incresing oscillation leading to destabilization
+  //pid.Init(0.1,0,0.1); //reaction time of the controller is reduced leading to faster compensation of oscillation.
+  //pid.Init(0.05,0,0.3); //car went on the shoulder but much more stable than before. need to increase kp to make controller faster.
+  //pid.Init(0.07,0,0.3); //less oscillation, car on shoulder
+  //pid.Init(0.055,0,0.7); //very little oscillation but car is lazy
+  //pid.Init(0.06,0,0.8); // car is still lazy and on the shoulder
+  //pid.Init(0.075,0,0.95); // car is still lazy and on the shoulder
+  //pid.Init(0.09,0,1.2); //car is a lot more agile but still hits the shoulders on sharp turns
+  //pid.Init(0.095,0,1.35); //car is a lot more agile but still hits the shoulders on sharp turns
+  //pid.Init(0.1,0,1.65);//car is a lot more agile but still hits the shoulders on sharp turns
+  //pid.Init(0.16,0,2); //almost perfect. add a bit of integral gain to centralize the car on the road
+  //pid.Init(0.16,0.0005,2); // too much overshoot
+  pid.Init(0.16,0.00025,2); // perfect!
+
 ## Dependencies
 
 * cmake >= 3.5
